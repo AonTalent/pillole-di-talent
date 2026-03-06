@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pillole di Talent</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1A3A5C;
+      --blue:   #2B7BB9;
+      --sky:    #5BA8D4;
+      --powder: #D6EAF8;
+      --mist:   #EBF5FB;
+      --cream:  #F8FAFB;
+      --white:  #FFFFFF;
+      --text:   #1A2B3C;
+      --muted:  #6B8299;
+      --accent: #F0A500;
+    }
+
+    html, body { width: 100%; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      width: 100%;
+      background: var(--navy);
+      padding: 80px 40px 100px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 110% 50%, rgba(91,168,212,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at -10% 80%, rgba(43,123,185,0.2) 0%, transparent 60%);
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--powder);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero-title span {
+      color: var(--sky);
+    }
+
+    .hero-desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      max-width: 600px;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s forwards;
+    }
+
+    .hero-wave {
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      width: 100%;
+      height: 60px;
+      display: block;
+    }
+
+    /* ── GRID ── */
+    .editions {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 48px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(26,58,92,0.07), 0 1px 3px rgba(26,58,92,0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(26,58,92,0.13), 0 4px 12px rgba(26,58,92,0.06);
+    }
+
+    .card-cover {
+      height: 180px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-cover-1 {
+      background: linear-gradient(135deg, #1A3A5C 0%, #2B7BB9 60%, #5BA8D4 100%);
+    }
+    .card-cover-2 {
+      background: linear-gradient(135deg, #1A3A5C 0%, #1A6B5C 60%, #2BAA85 100%);
+    }
+    .card-cover-soon {
+      background: linear-gradient(135deg, #2C3245 0%, #3D4E6A 100%);
+    }
+
+    .card-cover-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background-image: radial-gradient(circle, white 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    .card-cover-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.15);
+      position: absolute;
+      right: 20px;
+      bottom: -10px;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .card-cover-icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .card-body {
+      padding: 24px 24px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-edition {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-top: 1px solid #F0F4F8;
+    }
+
+    .card-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--mist);
+      color: var(--blue);
+    }
+
+    .card-arrow {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--powder);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .card:hover .card-arrow {
+      background: var(--blue);
+      transform: translateX(3px);
+    }
+
+    .card:hover .card-arrow svg path {
+      stroke: white;
+    }
+
+    /* COMING SOON card */
+    .card-soon {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how {
+      background: var(--navy);
+      padding: 80px 32px;
+    }
+
+    .how-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .how-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 12px;
+    }
+
+    .how-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: white;
+      margin-bottom: 56px;
+    }
+
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+    }
+
+    .how-step {
+      text-align: center;
+    }
+
+    .how-icon {
+      width: 60px; height: 60px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 16px;
+    }
+
+    .how-step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .how-step-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 36px 32px;
+      font-size: 13px;
+      color: var(--muted);
+      background: var(--cream);
+      border-top: 1px solid #E8EFF5;
+    }
+
+    footer a { color: var(--blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 24px 80px; }
+      .editions { padding: 56px 20px 80px; }
+      .how { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Newsletter mensile</div>
+    <h1 class="hero-title">Pillole di<br><span>Talent</span></h1>
+    <p class="hero-desc">Ogni mese, un tema diverso per supportare la tua crescita professionale. Brevi contenuti per riflettere, sperimentare e migliorare — senza perdere tempo.</p>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 60 L0 30 Q360 0 720 30 Q1080 60 1440 20 L1440 60 Z" fill="#F8FAFB"/>
+  </svg>
+</header>
+
+<!-- EDITIONS GRID -->
+<main class="editions">
+  <p class="section-label">Tutte le edizioni</p>
+  <h2 class="section-title">Scegli un'edizione da esplorare</h2>
+
+  <div class="grid">
+
+    <!-- EDIZIONE 1 -->
+    <a class="card" href="edizione-01.html">
+      <div class="card-cover card-cover-1">
+        <div class="card-cover-pattern"></div>
+        <div class="card-cover-number">01</div>
+        <div class="card-cover-icon">⚡</div>
+        <span class="card-badge">Disponibile</span>
+      </div>
+      <div class="card-body">
+        <p class="card-edition">Edizione #1</p>
+        <h3 class="card-title">La trappola della risposta veloce</h3>
+        <p class="card-desc">Cosa succede nella nostra testa quando siamo sotto pressione? Impara a riconoscere i meccanismi che abbassano la qualità del lavoro senza che ce ne accorgiamo.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-pills">
+          <span class="pill">🎬 Video</span>
+          <span class="pill">🎧 Podcast</span>
+          <span class="pill">💡 Esperimento</span>
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="#2B7BB9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- EDIZIONE 2 – COMING SOON (template, da attivare) -->
+    <div class="card card-soon">
+      <div class="card-cover card-cover-soon">
+        <div class="card-cover-pattern"></div>
+        <div class="card-cover-number">02</div>
+        <div class="card-cover-icon">🔒</div>
+        <span class="card-badge">In arrivo</span>
+      </div>
+      <div class="card-body">
+        <p class="card-edition">Edizione #2</p>
+        <h3 class="card-title">Prossimamente</h3>
+        <p class="card-desc">Il tema della prossima edizione sarà svelato presto. Torna a trovarci il mese prossimo!</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-pills">
+          <span class="pill">🕐 Presto disponibile</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <p class="how-label">Come funziona</p>
+    <h2 class="how-title">Ogni edizione, tre passi</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-icon">🎬</div>
+        <p class="how-step-title">Guarda il video</p>
+        <p class="how-step-desc">Un'introduzione di un minuto per entrare nel tema dell'edizione.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-icon">🎧</div>
+        <p class="how-step-title">Ascolta il podcast</p>
+        <p class="how-step-desc">Una conversazione di 6-8 minuti con riflessioni e spunti concreti.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-icon">💡</div>
+        <p class="how-step-title">Mettiti alla prova</p>
+        <p class="how-step-desc">Un esperimento della settimana per mettere in pratica quanto scoperto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <a href="https://umanamente.io">umanamente.io</a> · Pillole di Talent</p>
+</footer>
+
+</body>
+</html>
