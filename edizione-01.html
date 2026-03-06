@@ -266,34 +266,6 @@
       border: none;
     }
 
-    /* Placeholder (da rimuovere quando si inserisce il vero iframe) */
-    .video-placeholder {
-      width: 100%; height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #1A3A5C, #2B7BB9);
-      color: white;
-      cursor: pointer;
-    }
-
-    .play-btn {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      border: 2px solid rgba(255,255,255,0.4);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .video-placeholder:hover .play-btn {
-      transform: scale(1.1);
-      background: rgba(255,255,255,0.25);
-    }
-
     .video-placeholder p {
       font-size: 14px;
       opacity: 0.7;
@@ -531,20 +503,17 @@
     <p class="block-intro">Un minuto per entrare nel tema dell'edizione. Guarda il video prima di procedere.</p>
 
     <div class="video-wrapper">
-      <!--
-        ══════════════════════════════════════════════════════
-        ISTRUZIONI: sostituisci il blocco .video-placeholder
-        con il tag <iframe> fornito da HeyGen una volta
-        pubblicato il video. Esempio:
-
-        <iframe
-          src="https://app.heygen.com/embeds/IL-TUO-ID-VIDEO"
-          title="Pillole di Talent #1"
-          allowfullscreen
-          allow="autoplay">
-        </iframe>
-        ══════════════════════════════════════════════════════
-      -->
+      <iframe
+        src="https://player.vimeo.com/video/1167760239?badge=0&autopause=0&player_id=0&app_id=58479"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        title="Pillole di Talent - Edizione 2026 - 1">
+      </iframe>
+      <script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
+    
       <div class="video-placeholder">
         <div class="play-btn">▶</div>
         <p>Video HeyGen — inserire l'embed qui</p>
@@ -559,7 +528,7 @@
       <span class="block-tag">Step 2 · Podcast</span>
     </div>
     <h2 class="block-title">Ascolta e rifletti</h2>
-    <p class="block-intro">Una conversazione di 6-7 minuti per esplorare il tema in profondità — con spunti concreti e un esempio dal mondo del lavoro.</p>
+    <p class="block-intro">Un breve podcast di 7 minuti per esplorare il tema in profondità — con spunti concreti e un esempio dal mondo del lavoro.</p>
 
     <div class="podcast-wrapper">
       <div class="podcast-header">
